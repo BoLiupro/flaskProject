@@ -2,7 +2,7 @@ from models.admin import user_admin
 from models.rider import task, income, login_rider
 from models.seller import like, collection, forward, comment, upload_seller
 from models.user import register, cancellation, changePassword, changeName, follow, order, searchBySeller, \
-    searchByGoods, searchByClassfication, login_user, upload_user,send_mail
+    searchByGoods, searchByClassfication, login_user, upload_user, send_mail
 
 from my_mail import mail
 
@@ -10,8 +10,8 @@ from flask import Flask
 from flask_restful import Api
 
 app = Flask(__name__)
+app.config.from_object('my_mail')
 api = Api(app)
-
 
 mail.init_app(app)
 
@@ -38,10 +38,7 @@ api.add_resource(comment, '/seller/comment')
 api.add_resource(upload_seller, '/seller/upload_seller')
 
 api.add_resource(user_admin, '/admin/user')
-
 api.add_resource(send_mail, '/mail')
-
-
 
 if __name__ == '__main__':
     app.run()
